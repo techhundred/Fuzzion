@@ -2,9 +2,11 @@
 
 Fuzzy / approximate string matching metrics for PHP, JavaScript, Python
 
+![Fuzzion](/fuzzion.png)
+
 **version: 1.0.0**
 
-**Included Metrics**
+**Included Metrics:**
 
 * [Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance)
 * [LCS](https://en.wikipedia.org/wiki/Longest_common_subsequence_problem)
