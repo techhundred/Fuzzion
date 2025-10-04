@@ -18,6 +18,7 @@ function test()
         const string2 = test[1];
         echo();
         echo('levenshtein("'+string1+'", "'+string2+'") = '+String(matcher.levenshtein(string1, string2)));
+        echo('damerau("'+string1+'", "'+string2+'") = '+String(matcher.damerau(string1, string2)));
         echo('lcs("'+string1+'", "'+string2+'") = '+String(matcher.lcs(string1, string2)));
         echo('jaccard("'+string1+'", "'+string2+'") = '+String(matcher.jaccard(string1, string2)));
         echo('overlap("'+string1+'", "'+string2+'") = '+String(matcher.overlap(string1, string2)));

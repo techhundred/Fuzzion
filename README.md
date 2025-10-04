@@ -1,6 +1,6 @@
 # Fuzzion
 
-Fuzzy / approximate string matching metrics for PHP, JavaScript, Python
+Fuzzy / approximate string similarity metrics for PHP, JavaScript, Python
 
 ![Fuzzion](/fuzzion.png)
 
@@ -9,6 +9,7 @@ Fuzzy / approximate string matching metrics for PHP, JavaScript, Python
 **Included Metrics:**
 
 * [Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance)
+* [Damerau-Levenshtein](https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance)
 * [LCS](https://en.wikipedia.org/wiki/Longest_common_subsequence_problem)
 * [Hamming](https://en.wikipedia.org/wiki/Hamming_distance)
 * [Jaro-Winkler](https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance)
@@ -22,6 +23,7 @@ see `test/` folder
 
 ```text
 levenshtein("jointure", "join") = 0.5
+damerau("jointure", "join") = 0.5
 lcs("jointure", "join") = 0.5
 jaccard("jointure", "join") = 0.5
 overlap("jointure", "join") = 1
@@ -31,6 +33,7 @@ ngram("jointure", "join", 2) = 0.6
 ngram("jointure", "join", 3) = 0.5
 
 levenshtein("jointure", "jiontre") = 0.625
+damerau("jointure", "jiontre") = 0.75
 lcs("jointure", "jiontre") = 0.625
 jaccard("jointure", "jiontre") = 0.875
 overlap("jointure", "jiontre") = 1
@@ -40,6 +43,7 @@ ngram("jointure", "jiontre", 2) = 0.30769230769231
 ngram("jointure", "jiontre", 3) = 0
 
 levenshtein("jointure", "joitnrue") = 0.625
+damerau("jointure", "joitnrue") = 0.75
 lcs("jointure", "joitnrue") = 0.5
 jaccard("jointure", "joitnrue") = 1
 overlap("jointure", "joitnrue") = 1
@@ -49,6 +53,7 @@ ngram("jointure", "joitnrue", 2) = 0.28571428571429
 ngram("jointure", "joitnrue", 3) = 0.16666666666667
 
 levenshtein("jointure", "turejoin") = 0
+damerau("jointure", "turejoin") = 0
 lcs("jointure", "turejoin") = 0
 jaccard("jointure", "turejoin") = 1
 overlap("jointure", "turejoin") = 1

@@ -1,7 +1,7 @@
 <?php
 /**
 *  Fuzzion
-*  Fuzzy / approximate string matching metrics for PHP, JavaScript, Python
+*  Fuzzy / approximate string similarity metrics for PHP, JavaScript, Python
 *
 *  @version: 1.0.0
 *  https://github.com/foo123/Fuzzion
@@ -36,11 +36,10 @@ class Fuzzion
         return $s1 === $s2 ? 1 : 0;
     }
 
-    public function levenshtein($s1, $s2/*, $transpositions = false*/)
+    public function levenshtein($s1, $s2)
     {
         // https://en.wikipedia.org/wiki/Levenshtein_distance
-        // https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance
-        // allows only insertions, deletions and substitutions (and optionally adjacent transpositions)
+        // counts only insertions, deletions and substitutions
 
         //$s1 = $this->asciify($s1);
         //$s2 = $this->asciify($s2);
@@ -80,13 +79,62 @@ class Fuzzion
                     $a[$j-1] +  1,        // insertion
                     $b[$j-1] +  $d        // substitution
                 );
-                /*if ($transpositions && ($i > 1) && ($j > 1) && (mb_substr($s1, $i-1, 1, 'UTF-8') === mb_substr($s2, $j-2, 1, 'UTF-8')) && (mb_substr($s1, $i-2, 1, 'UTF-8') === mb_substr($s2, $j-1, 1, 'UTF-8')))
+            }
+        }
+        return 1 - $a[$l2] / $l1;
+    }
+
+    public function damerau($s1, $s2)
+    {
+        // https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance
+        // counts only insertions, deletions, substitutions and adjacent transpositions
+
+        //$s1 = $this->asciify($s1);
+        //$s2 = $this->asciify($s2);
+
+        $l1 = mb_strlen($s1, 'UTF-8');
+        $l2 = mb_strlen($s2, 'UTF-8');
+        if ((0 === $l1) || (0 === $l2)) return (0 === $l1) && (0 === $l2) ? 1 : 0;
+
+        if ($l2 > $l1)
+        {
+            // swap
+            $t = $s1;
+            $s1 = $s2;
+            $s2 = $t;
+            $t = $l1;
+            $l1 = $l2;
+            $l2 = $t;
+        }
+        $b = array_fill(0, $l2+1, 0);
+        $a = array_fill(0, $l2+1, 0);
+        for ($j=0; $j<=$l2; ++$j) $a[$j] = $j;
+
+        for ($i=1; $i<=$l1; ++$i)
+        {
+            // swap
+            $c = array_merge(array(), $b);
+            $t = &$a;
+            $a = &$b;
+            $b = &$t;
+            $a[0] = $b[0] = $i - 1;
+            $c1 = mb_substr($s1, $i-1, 1, 'UTF-8');
+            for ($j=1; $j<=$l2; ++$j)
+            {
+                $c2 = mb_substr($s2, $j-1, 1, 'UTF-8');
+                $d = $c1 === $c2 ? 0 : 1;
+                $a[$j] = min(
+                    $b[$j  ] +  1,        // deletion
+                    $a[$j-1] +  1,        // insertion
+                    $b[$j-1] +  $d        // substitution
+                );
+                if (($i > 1) && ($j > 1) && (mb_substr($s1, $i-1, 1, 'UTF-8') === mb_substr($s2, $j-2, 1, 'UTF-8')) && (mb_substr($s1, $i-2, 1, 'UTF-8') === mb_substr($s2, $j-1, 1, 'UTF-8')))
                 {
                     $a[$j] = min(
                         $a[$j  ],
                         $c[$j-2] + $d     // transposition
                     );
-                }*/
+                }
             }
         }
         return 1 - $a[$l2] / $l1;
@@ -95,7 +143,7 @@ class Fuzzion
     public function lcs($s1, $s2)
     {
         // https://en.wikipedia.org/wiki/Longest_common_subsequence_problem
-        // allows only insertions and deletions
+        // counts only insertions and deletions
 
         //$s1 = $this->asciify($s1);
         //$s2 = $this->asciify($s2);
@@ -142,7 +190,7 @@ class Fuzzion
     public function hamming($s1, $s2)
     {
         // https://en.wikipedia.org/wiki/Hamming_distance
-        // allows only substitutions
+        // counts only substitutions and either deletions or insertions
 
         //$s1 = $this->asciify($s1);
         //$s2 = $this->asciify($s2);

@@ -16,6 +16,7 @@ function test()
         $string1 = $test[0];
         $string2 = $test[1];
         echo "\n"; echo('levenshtein("'.$string1.'", "'.$string2.'") = '.strval($matcher->levenshtein($string1, $string2)));
+        echo "\n"; echo('damerau("'.$string1.'", "'.$string2.'") = '.strval($matcher->damerau($string1, $string2)));
         echo "\n"; echo('lcs("'.$string1.'", "'.$string2.'") = '.strval($matcher->lcs($string1, $string2)));
         echo "\n"; echo('jaccard("'.$string1.'", "'.$string2.'") = '.strval($matcher->jaccard($string1, $string2)));
         echo "\n"; echo('overlap("'.$string1.'", "'.$string2.'") = '.strval($matcher->overlap($string1, $string2)));

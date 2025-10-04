@@ -41,6 +41,7 @@ def test():
         string2 = test[1]
         print()
         print('levenshtein("'+string1+'", "'+string2+'") = '+str(matcher.levenshtein(string1, string2)))
+        print('damerau("'+string1+'", "'+string2+'") = '+str(matcher.damerau(string1, string2)))
         print('lcs("'+string1+'", "'+string2+'") = '+str(matcher.lcs(string1, string2)))
         print('jaccard("'+string1+'", "'+string2+'") = '+str(matcher.jaccard(string1, string2)))
         print('overlap("'+string1+'", "'+string2+'") = '+str(matcher.overlap(string1, string2)))

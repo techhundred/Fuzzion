@@ -1,6 +1,6 @@
 ##
 #  Fuzzion
-#  Fuzzy / approximate string matching metrics for PHP, JavaScript, Python
+#  Fuzzy / approximate string similarity metrics for PHP, JavaScript, Python
 #
 #  @version: 1.0.0
 #  https://github.com/foo123/Fuzzion
@@ -32,10 +32,9 @@ class Fuzzion:
     def ident(self, s1, s2):
         return 1 if s1 == s2 else 0
 
-    def levenshtein(self, s1, s2): #, transpositions = False
+    def levenshtein(self, s1, s2):
         # https://en.wikipedia.org/wiki/Levenshtein_distance
-        # https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance
-        # allows only insertions, deletions and substitutions (and optionally adjacent transpositions)
+        # counts only insertions, deletions and substitutions
 
         l1 = len(s1)
         l2 = len(s2)
@@ -68,16 +67,54 @@ class Fuzzion:
                     a[j-1] +  1,        # insertion
                     b[j-1] +  d         # substitution
                 )
-                #if transpositions and (i > 1) and (j > 1) and (s1[i-1] == s2[j-2]) and (s1[i-2] == s2[j-1]):
-                #    a[j] = min(
-                #        a[j  ],
-                #        c[j-2] + d     # transposition
-                #    )
+        return 1 - a[l2] / l1
+
+    def damerau(self, s1, s2):
+        # https://en.wikipedia.org/wiki/Damerau%E2%80%93Levenshtein_distance
+        # counts only insertions, deletions, substitutions and adjacent transpositions
+
+        l1 = len(s1)
+        l2 = len(s2)
+        if (0 == l1) or (0 == l2): return 1 if (0 == l1) and (0 == l2) else 0
+
+        if l2 > l1:
+            # swap
+            t = s1
+            s1 = s2
+            s2 = t
+            t = l1
+            l1 = l2
+            l2 = t
+        b = [0] * (l2+1)
+        a = [0] * (l2+1)
+        for j in range(l2+1): a[j] = j
+
+        for i in range(1, l1+1):
+            # swap
+            c = b[:]
+            t = a
+            a = b
+            b = t
+            a[0] = b[0] = i - 1
+            c1 = s1[i-1]
+            for j in range(1, l2+1):
+                c2 = s2[j-1]
+                d = 0 if c1 == c2 else 1
+                a[j] = min(
+                    b[j  ] +  1,        # deletion
+                    a[j-1] +  1,        # insertion
+                    b[j-1] +  d         # substitution
+                )
+                if (i > 1) and (j > 1) and (s1[i-1] == s2[j-2]) and (s1[i-2] == s2[j-1]):
+                    a[j] = min(
+                        a[j  ],
+                        c[j-2] + d     # transposition
+                    )
         return 1 - a[l2] / l1
 
     def lcs(self, s1, s2):
         # https://en.wikipedia.org/wiki/Longest_common_subsequence_problem
-        # allows only insertions and deletions
+        # counts only insertions and deletions
 
         l1 = len(s1)
         l2 = len(s2)
@@ -109,7 +146,7 @@ class Fuzzion:
 
     def hamming(self, s1, s2):
         # https://en.wikipedia.org/wiki/Hamming_distance
-        # allows only substitutions
+        # counts only substitutions and either deletions or insertions
 
         l1 = len(s1)
         l2 = len(s2)
